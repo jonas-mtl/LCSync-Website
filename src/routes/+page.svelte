@@ -80,12 +80,16 @@
 
     const arrow = ">"
     let cursorBlink = "";
+
+    $: innerWidth = 0
+    $: innerHeight = 0
 </script>
 
-<svelte:window on:mousemove={domousemove} />
+<svelte:window on:mousemove={domousemove} bind:innerWidth bind:innerHeight/>
+
 
 <section>
-    <img class="banner" src={banner} alt="banner">
+    <img class="banner" src={banner} alt="banner" draggable="false"  style={`transform: translateX(${(x-(innerWidth/2))*0.008}px) translateY(${(y-(innerHeight/2))*0.008}px) scale(105%);`}>
     <div class="cursor-element" style={cursorStyle}>
         <div class:mouseEffectVar class={`cursor-glow ${mouseEffectVar ? "active" : ""}`}></div>
         <span></span>
